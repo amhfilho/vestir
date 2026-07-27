@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
+  moduleFormat    = "cjs"
+}
+
+datasource db {
+  provider   = "postgresql"
+  extensions = [vector]
+}
+
+model Garment {
+  id                String   @id @default(uuid())
+  imagePath         String   @map("image_path")
+  type              String
+  colors            String[]
+  style             String
+  occasions         String[]
+  pattern           String
+  estimatedMaterial String   @map("estimated_material")
+  description       String
+
+  /// Written via raw SQL after create() — Prisma can't map the pgvector
+  /// `vector` type, so this column is entirely absent from the generated
+  /// Client type. See WardrobeService.createFromUpload.
+  embedding Unsupported("vector(1536)")?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("garments")
+}

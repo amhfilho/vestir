@@ -65,28 +65,31 @@ vestir/
 │   ├── src/
 │   │   ├── main.ts
 │   │   ├── app.module.ts
-│   │   ├── wardrobe/        # garment CRUD
-│   │   ├── outfits/         # outfit suggestions
-│   │   ├── images/          # image generation endpoints
-│   │   ├── claude-vision/   # garment analysis service
-│   │   ├── embeddings/      # embedding generation service
-│   │   ├── agent/           # LangChain.js suggestion agent
-│   │   ├── image-gen/       # Replicate integration
-│   │   └── prisma/
+│   │   ├── wardrobe/        # garment CRUD (upload orchestration + endpoints)
+│   │   ├── storage/         # image storage abstraction (local disk now, R2 in 1.1)
+│   │   ├── claude-vision/   # garment analysis service (mocked)
+│   │   ├── embeddings/      # embedding generation service (mocked)
+│   │   ├── prisma/          # PrismaService/PrismaModule (Nest DI wrapper)
+│   │   ├── generated/       # generated Prisma Client (gitignored, not committed)
+│   │   ├── outfits/         # outfit suggestions (phase 2)
+│   │   ├── images/          # image generation endpoints (phase 3)
+│   │   ├── agent/           # LangChain.js suggestion agent (phase 2)
+│   │   └── image-gen/       # Replicate integration (phase 3)
 │   ├── prisma/
 │   │   ├── schema.prisma
 │   │   └── migrations/
+│   ├── storage/              # locally stored uploads (dev only, gitignored)
 │   └── .env.example
 ├── frontend/                # Next.js (later phase)
-└── docker-compose.yml
+└── docker-compose.yml       # local Postgres + pgvector
 ```
 
 ## Status
 
-- [ ] Phase 0: dev environment setup
-- [ ] Phase 1: upload endpoint + Claude Vision analysis (mocked)
-- [ ] Phase 1: PostgreSQL schema + pgvector (local)
-- [ ] Phase 1: wardrobe CRUD
+- [x] Phase 0: dev environment setup
+- [x] Phase 1: upload endpoint + Claude Vision analysis (mocked)
+- [x] Phase 1: PostgreSQL schema + pgvector (local)
+- [x] Phase 1: wardrobe CRUD (create, list, get-by-id — update/delete not yet needed)
 - [ ] Phase 1.1: real R2, Claude Vision, embeddings + cloud deploy
 - [ ] Phase 2: LangChain.js agent
 - [ ] Phase 3: Replicate integration
@@ -94,6 +97,7 @@ vestir/
 ## Getting started
 
 ```bash
+docker compose up -d   # local Postgres + pgvector (host port 5434)
 cd backend
 cp .env.example .env   # fill in DB, R2, Claude/OpenAI/Replicate credentials
 npm install

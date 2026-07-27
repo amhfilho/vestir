@@ -6,6 +6,12 @@ dist/
 build/
 .next/
 
+# generated Prisma Client (regenerated via `prisma generate`/`migrate dev`)
+backend/src/generated/
+
+# locally stored uploads (dev stand-in for R2)
+backend/storage/
+
 # env files
 .env
 .env.local
