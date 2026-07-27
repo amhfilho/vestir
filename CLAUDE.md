@@ -14,6 +14,7 @@ This is a learning project. I'm an experienced **Java** developer, new to **Node
 2. **TDD approach** — for each class or method, write/suggest the unit tests first, then the implementation.
 3. **Learning experience** — explain architecture decisions and Node.js design patterns (modules, services, dependency injection, etc.) as they come up. Since I come from Java, use Java analogies where they help. Document the reasoning behind each non-trivial decision.
 4. **Follow the spec** — implement what's defined in `ROADMAP.md`; flag ambiguities or gaps instead of improvising scope.
+5. **Keep README.md current** — whenever a change adds or modifies user-facing functionality (endpoints, CLI commands, setup/run steps), update `backend/README.md`'s instructions/examples in the same change, so it always reflects how to run and use the app as of the latest commit.
 
 ## Code Conventions
 
